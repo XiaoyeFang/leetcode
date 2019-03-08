@@ -141,3 +141,70 @@ func mergeTwoLists(l1 *ListNode, l2 *ListNode) *ListNode {
 	return ret
 
 }
+
+//请判断一个链表是否为回文链表。
+
+/*
+
+先去找中结点,快慢指针  快指针的速度是慢指针的两倍
+
+反转后半段
+
+进行比较
+
+*/
+func IsPalindrome(head *ListNode) bool {
+
+	if head == nil {
+		return true
+	}
+
+	mid := FindMiddleNode(head)
+
+	prev := ReverseListNode(mid)
+
+	q := head
+
+	for prev != nil {
+		if prev.Val != q.Val {
+			return false
+		}
+		prev = prev.Next
+		q = q.Next
+	}
+
+	return true
+}
+
+//原地反转
+func ReverseListNode(head *ListNode) *ListNode {
+	prev := &ListNode{}
+
+	for head != nil {
+		temp := head.Next
+		head.Next, prev = prev, head
+		head = temp
+	}
+
+	return prev
+}
+
+//寻找链表中点
+func FindMiddleNode(head *ListNode) *ListNode {
+
+	if head == nil || head.Next == nil {
+		return head
+	}
+
+	quick, slow := head, head
+
+	for slow != nil && quick.Next != nil {
+		quick = quick.Next.Next
+		slow = slow.Next
+
+	}
+	if quick != nil {
+		slow = slow.Next
+	}
+	return slow
+}

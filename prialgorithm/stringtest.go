@@ -1,6 +1,7 @@
 package prialgorithm
 
 import (
+	"fmt"
 	"math"
 	"strings"
 )
@@ -19,7 +20,7 @@ func reverseString(s string) string {
 }
 
 //给出一个 32 位的有符号整数，你需要将这个整数中每位上的数字进行反转。
-func reverse(x int) int {
+func Reverse(x int) int {
 
 	sum := 0
 	for {
@@ -106,7 +107,7 @@ func isAnagram(s string, t string) bool {
 //给定一个字符串，验证它是否是回文串，只考虑字母和数字字符，可以忽略字母的大小写。
 
 //你们这题太欺负人了你知道吗，只考虑字母和数字字符你们还把标点符号算进去。。。 555555555555555
-func isPalindrome(s string) bool {
+func isPalindString(s string) bool {
 	if s == "" {
 		return true
 	}
@@ -158,31 +159,73 @@ func isAlphanum(c rune) bool {
 }
 
 //请你来实现一个 atoi 函数，使其能将字符串转换成整数。
-func myAtoi(str string) int {
-	//     这个真尼玛难啊，我连go里的atoi方法里的都用上了还没解开，将来我如果看到这个，一定要穿越回来告诉我怎么做
-	if str == "" {
+func MyAtoi(str string) int {
+	//这个真尼玛难啊，我连go里的atoi方法里的都用上了还没解开，将来我如果看到这个，一定要穿越回来告诉我怎么做
+	//if str == "" {
+	//	return 0
+	//}
+	//runes := []rune(str)
+	//var sum = 0
+	//var negative = false
+	//if !isNum(runes[0]) && runes[0] != '-' && runes[0] != ' ' {
+	//	return 0
+	//}
+	//for _, v := range runes {
+	//	fmt.Println(string(v))
+	//	if v == '-' {
+	//		negative = true
+	//	}
+	//	if isNum(v) {
+	//		sum = sum*10 + int(v-48)
+	//	}else {
+	//		break
+	//	}
+	//}
+	//
+	//if negative {
+	//	sum = sum * -1
+	//}
+	//if sum < math.MinInt32 {
+	//	return math.MinInt32
+	//}
+	//if sum > math.MaxInt32 {
+	//	return math.MaxInt32
+	//}
+	//	return sum
+	str = strings.Replace(str, " ", "", 1)
+	if str == "" || len(str) == 0 {
 		return 0
 	}
+
 	runes := []rune(str)
-	var sum = 0
-	var negative = false
-	if !isNum(runes[0]) && runes[0] != '-' && runes[0] != ' ' {
-		return 0
+	firstChar := runes[0]
+	sign := 1
+	start := 0
+	res := 0
+	if firstChar == '+' {
+		sign = 1
+		start++
+	} else if firstChar == '-' {
+		sign = -1
+		start++
 	}
-	for _, v := range runes {
-		if v == '-' {
-			negative = true
+
+	for i := start; i < len(str); i++ {
+		if !isNum(runes[i]) {
+			fmt.Println(string(res * sign))
+			return int(res * sign)
 		}
-		if isNum(v) {
-			sum = sum*10 + int(v-48)
+		res = res*10 + int(runes[i])
+		if sign == 1 && res > math.MaxInt32 {
+			return math.MaxInt32
+		}
+		if sign == -1 && res > math.MaxInt32 {
+			return math.MaxInt32
 		}
 	}
 
-	if negative {
-		sum = sum * -1
-	}
+	return int(res * sign)
 
-	return sum
 }
 
 func isNum(c rune) bool {

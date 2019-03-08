@@ -1,5 +1,7 @@
 package prialgorithm
 
+import "fmt"
+
 /*
 给定一个排序数组，你需要在原地删除重复出现的元素，使得每个元素只出现一次，返回移除后数组的新长度。
 不要使用额外的数组空间，你必须在原地修改输入数组并在使用 O(1) 额外空间的条件下完成。
@@ -32,18 +34,37 @@ func RemoveDuplicates(nums []int) int {
 
 贪心算法 跟后面的动态规划股票问题结合理解
 */
-func MaxProfit(prices []int) int {
-	sum := 0
-	//只要赚就卖掉
-	for i := 1; i < len(prices); i++ {
-		if prices[i-1] < prices[i] {
-			sum += prices[i] - prices[i-1]
+//func MaxProfit(prices []int) int {
+//	sum := 0
+//	//只要赚就卖掉
+//	for i := 1; i < len(prices); i++ {
+//		if prices[i-1] < prices[i] {
+//			sum += prices[i] - prices[i-1]
+//
+//		}
+//
+//	}
+//
+//	return sum
+//}
 
+func MaxProfit(prices []int) int {
+
+	//只要赚就卖掉
+	for i := 0; i < len(prices)-1; i++ {
+		sum := 0
+		//for j := i + 1; j < len(prices); j++ {
+		if prices[i+1] > prices[i] {
+			sum += prices[i+1] - prices[i]
+			continue
 		}
+
+		//}
+		fmt.Println(sum)
 
 	}
 
-	return sum
+	return 0
 }
 
 /*
@@ -168,7 +189,7 @@ func moveZeroes(nums []int) {
 }
 
 //给定一个整数数组 nums 和一个目标值 target，请你在该数组中找出和为目标值的那 两个 整数，并返回他们的数组下标。
-func twoSum(nums []int, target int) []int {
+func TwoSum(nums []int, target int) []int {
 	result := make([]int, 0)
 
 	for i := 0; i < len(nums); i++ {
@@ -189,8 +210,84 @@ func twoSum(nums []int, target int) []int {
 
 //判断一个 9x9 的数独是否有效。只需要根据以下规则，验证已经填入的数字是否有效即可
 
-func isValidSudoku(board [][]byte) bool {
-	//缺一
+func IsValidSudoku(board [][]byte) bool {
+
+	//创建三个二维数组 依次比较横 纵 方针中是否存在相同数字
+
+	//raw := make([][]byte, 9, 9)
+	//col := make([][]byte, 9, 9)
+	//cell := make([][]byte, 9, 9)
+	//
+	//for i := 0; i < len(board); i++ {
+	//	for j := 0; j < len(board[i]); j++ {
+	//
+	//		if board[i][j] == '.' {
+	//			continue
+	//		}
+	//
+	//		if isContains(board[i][j], raw[i]) {
+	//			fmt.Println("iiiiiii", i)
+	//			return false
+	//		}
+	//		if isContains(board[i][j], col[j]) {
+	//			fmt.Println("jjjjjjj", j)
+	//			return false
+	//		}
+	//
+	//		//	计算在第几个方阵里
+	//		g := i/3*3 + j/3
+	//		println("g====", g)
+	//		if isContains(board[i][j], cell[g]) {
+	//
+	//			fmt.Printf("i %v,j %v,board[i][j] %v,raw[i] %v  g %v \n", i, j, board[i][j], cell[g], g)
+	//			return false
+	//		}
+	//
+	//		raw[i] = append(raw[i], board[i][j])
+	//		col[j] = append(col[j], board[i][j])
+	//		cell[g] = append(cell[g], board[i][j])
+	//
+	//	}
+	//	fmt.Printf("cell %v \n", cell)
+	//
+	//	//fmt.Printf("raw[i] %v \n", raw[i])
+	//}
+	////fmt.Printf("col[j] %v \n", col)
+	//return true
+
+	rowMask, colMask, areaMask := [9][9]bool{}, [9][9]bool{}, [9][9]bool{}
+
+	for row := range board {
+		for col := range board[row] {
+
+			if board[row][col] == '.' {
+				continue
+			}
+
+			digit := board[row][col] - '0' - 1
+			area := (row/3)*3 + col/3
+
+			if rowMask[row][digit] || colMask[col][digit] || areaMask[area][digit] {
+				return false
+			}
+
+			rowMask[row][digit] = true
+			colMask[col][digit] = true
+			areaMask[area][digit] = true
+		}
+	}
+
+	return true
+}
+
+func isContains(b byte, nums []byte) bool {
+
+	for _, v := range nums {
+		if b == v {
+			fmt.Printf("b %v ,v,%v \n", string(b), string(v))
+			return true
+		}
+	}
 	return false
 }
 
