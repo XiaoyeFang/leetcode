@@ -23,7 +23,7 @@ func QuickSort(nums []int) {
 		}
 	}
 	
-	nums[head] = mid111111
+	nums[head] = mid
 	QuickSort(nums[:head])
 	QuickSort(nums[head+1:])
 }
