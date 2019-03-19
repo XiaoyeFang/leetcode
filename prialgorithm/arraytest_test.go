@@ -11,7 +11,7 @@ func TestMaxProfit(t *testing.T) {
 }
 
 func TestIsValidSudoku(t *testing.T) {
-	nums := [][]byte{
+	nums1 := [][]byte{
 		{'5', '3', '.', '.', '7', '.', '.', '.', '0'},
 		{'6', '.', '.', '1', '9', '5', '.', '.', '.'},
 		{'.', '9', '8', '.', '.', '.', '.', '6', '.'},
@@ -33,6 +33,6 @@ func TestIsValidSudoku(t *testing.T) {
 	//	{'.', '.', '.', '4', '1', '9', '.', '.', '5'},
 	//	{'.', '.', '.', '.', '8', '.', '.', '7', '9'},
 	//}
-	valid := IsValidSudoku(nums)
+	valid := IsValidSudoku(nums1)
 	t.Log(valid)
 }
