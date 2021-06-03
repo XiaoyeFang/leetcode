@@ -25,6 +25,37 @@ func RemoveDuplicates(nums []int) int {
 	return len(nums)
 }
 
+//方法2
+func removeDuplicates(nums []int) int {
+	/*
+			排序数组 首先想到双指针 双指针分为长短指针和左右指针
+			这里适用于 slow 和 fast
+		    slow ,fast初始化0
+			fast前进+1 当 nums[fast]==nums[slow] 不作处理  fast继续+1
+			如果nums[fast]!=nums[slow] 那么将nums[low+1]赋值为nums[fast]
+			slow+1不管是重复的还是不重复的都不重要
+
+	*/
+	if len(nums) == 1 {
+		return 1
+	}
+
+	var slow, fast = 0, 0
+
+	for fast < len(nums) {
+
+		if nums[fast] == nums[slow] {
+			fast++
+		} else {
+			slow++
+			nums[slow] = nums[fast]
+			fast++
+		}
+	}
+
+	return slow + 1
+}
+
 /*
 给定一个数组，它的第 i 个元素是一支给定股票第 i 天的价格。
 
@@ -49,22 +80,28 @@ func RemoveDuplicates(nums []int) int {
 //}
 
 func MaxProfit(prices []int) int {
+	/*
+		动态规划的思路就是拆分问题，首先统计哪天买之后哪天卖可能会赚 赚多少，挑一个最多的
+	*/
 
-	//只要赚就卖掉
-	for i := 0; i < len(prices)-1; i++ {
-		sum := 0
-		//for j := i + 1; j < len(prices); j++ {
-		if prices[i+1] > prices[i] {
-			sum += prices[i+1] - prices[i]
-			continue
-		}
-
-		//}
-		fmt.Println(sum)
-
+	if len(prices) == 0 || len(prices) == 1 {
+		return 0
 	}
 
-	return 0
+	//初始化最小值
+	var minValue = prices[0]
+	var max = 0
+	for i := 0; i < len(prices); i++ {
+
+		if prices[i]-minValue > max {
+			max = prices[i] - minValue
+		}
+		if prices[i] < minValue {
+			minValue = prices[i]
+		}
+	}
+	return max
+
 }
 
 /*

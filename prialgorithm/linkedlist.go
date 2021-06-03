@@ -1,5 +1,7 @@
 package prialgorithm
 
+import "strings"
+
 type ListNode struct {
 	Val  int
 	Next *ListNode
@@ -203,8 +205,31 @@ func FindMiddleNode(head *ListNode) *ListNode {
 		slow = slow.Next
 
 	}
-	if quick != nil {
-		slow = slow.Next
-	}
 	return slow
+}
+
+func hasCycle(head *ListNode) bool {
+	if head == nil {
+		return false
+	}
+	low, fast := head, head
+	for low.Next != nil && fast.Next != nil &&fast.Next.Next != nil {
+		low = low.Next
+		fast = fast.Next.Next
+
+		if low == fast {
+			return true
+		}
+
+	}
+
+	return false
+}
+
+func splitFileIndex(path string) string {
+	paths := strings.Split(path, "/")
+	if len(paths) < 7 {
+		return ""
+	}
+	return strings.Join(paths[:6], "/") + "/file"
 }

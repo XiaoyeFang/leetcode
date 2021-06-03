@@ -1,7 +1,5 @@
 package sort
 
-import "fmt"
-
 func QuickSort(nums []int) {
 	if len(nums) < 1 {
 		return
@@ -10,7 +8,6 @@ func QuickSort(nums []int) {
 	i := 1
 	head, tail := 0, len(nums)-1
 	for head < tail {
-		fmt.Println(nums)
 		if nums[i] < mid {
 			nums[i], nums[head] = nums[head], nums[i]
 			head++

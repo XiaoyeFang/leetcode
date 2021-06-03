@@ -192,40 +192,74 @@ func MyAtoi(str string) int {
 	//	return math.MaxInt32
 	//}
 	//	return sum
-	str = strings.Replace(str, " ", "", 1)
-	if str == "" || len(str) == 0 {
-		return 0
-	}
 
-	runes := []rune(str)
-	firstChar := runes[0]
-	sign := 1
-	start := 0
-	res := 0
-	if firstChar == '+' {
-		sign = 1
-		start++
-	} else if firstChar == '-' {
-		sign = -1
-		start++
-	}
+	//str=strings.Trim(str," ")
+	//str = strings.Replace(str, " ", "", 1)
+	//if str == "" || len(str) == 0 {
+	//	return 0
+	//}
+	//
+	//runes := []rune(str)
+	//firstChar := runes[0]
+	//sign := 1
+	//start := 0
+	//res := 0
+	//if firstChar == '+' {
+	//	sign = 1
+	//	start++
+	//} else if firstChar == '-' {
+	//	sign = -1
+	//	start++
+	//}
+	//
+	//for i := start; i < len(str); i++ {
+	//	if !isNum(runes[i]) {
+	//		fmt.Println(string(res * sign))
+	//		return int(res * sign)
+	//	}
+	//	res = res*10 + int(runes[i])
+	//	if sign == 1 && res > math.MaxInt32 {
+	//		return math.MaxInt32
+	//	}
+	//	if sign == -1 && res > math.MaxInt32 {
+	//		return math.MaxInt32
+	//	}
+	//}
+	//
+	//return int(res * sign)
 
-	for i := start; i < len(str); i++ {
-		if !isNum(runes[i]) {
-			fmt.Println(string(res * sign))
-			return int(res * sign)
-		}
-		res = res*10 + int(runes[i])
-		if sign == 1 && res > math.MaxInt32 {
-			return math.MaxInt32
-		}
-		if sign == -1 && res > math.MaxInt32 {
-			return math.MaxInt32
-		}
-	}
-
-	return int(res * sign)
-
+	//str=strings.Trim(str," ")
+	//if str == "" || len(str) == 0 {
+	//	return 0
+	//}
+	//runes := []rune(str)
+	//var sum = 0
+	//var negative = false
+	//
+	//for _, v := range runes {
+	//
+	//	if v == '-' {
+	//		negative = true
+	//	}
+	//	if !isNum(v){
+	//		continue
+	//	}else {
+	//		fmt.Println(int(v))
+	//		sum = sum*10 + int(v-48)
+	//	}
+	//}
+	//
+	//if negative {
+	//	sum = sum * -1
+	//}
+	//if sum < math.MinInt32 {
+	//	return math.MinInt32
+	//}
+	//if sum > math.MaxInt32 {
+	//	return math.MaxInt32
+	//}
+	fmt.Printf("%b \n", 1<<31-1)
+	return -1 << 31
 }
 
 func isNum(c rune) bool {

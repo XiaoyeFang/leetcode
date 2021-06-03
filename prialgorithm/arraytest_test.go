@@ -5,7 +5,7 @@ import (
 )
 
 func TestMaxProfit(t *testing.T) {
-	prices := []int{1, 2, 3, 4, 5}
+	prices := []int{3, 2, 3, 1, 5,0}
 	sum := MaxProfit(prices)
 	t.Log("sum :=", sum)
 }
@@ -35,4 +35,9 @@ func TestIsValidSudoku(t *testing.T) {
 	//}
 	valid := IsValidSudoku(nums1)
 	t.Log(valid)
+}
+
+func TestRemoveDuplicates2(t *testing.T) {
+	//nums := []int{1, 1, 2, 2, 3, 4, 5}
+	//RemoveDuplicates2(nums)
 }
