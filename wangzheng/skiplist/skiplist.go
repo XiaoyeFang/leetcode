@@ -177,7 +177,6 @@ import (
 //	return fmt.Sprintf("level:%+v, length:%+v", sl.level, sl.length)
 //}
 
-
 const UP_LEVELS_ABILITY = 16
 const UP_LEVELS_TOTAL = 32
 
@@ -248,14 +247,15 @@ func (sl *skipList) Insert(score int64, val interface{}) {
 	for rander.Intn(UP_LEVELS_TOTAL) < UP_LEVELS_ABILITY {
 		curlevels++
 		if curlevels > sl.levels {
+			//每高一层，在上面就新建一层索引
 			sl.newlevels()
 		}
-
+        // 每新建一层索引就向上查找当前插入节点的前驱
 		for f.up == nil {
 			f = f.pre
 		}
 		f = f.up
-		tmpNode := &skipListNode{score: score}
+		tmpNode := &skipListNode{score: score,val: val}
 
 		curNode.up = tmpNode
 		tmpNode.down = curNode

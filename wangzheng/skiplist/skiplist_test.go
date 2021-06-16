@@ -39,6 +39,6 @@ func TestSkipList_Insert(t *testing.T) {
 	//fmt.Println(sk.Get(22))
 	//fmt.Println(sk.Size())
 	//fmt.Println(sk.Layout())
-	sk.Print()
+	//sk.Print()
 
 }
