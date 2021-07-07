@@ -21,12 +21,12 @@ func TestMyAtoi(t *testing.T) {
 	fmt.Println(res)
 	fmt.Println(int(0x00000011))
 }
-func fufeibonachi(i int) int{
-	if i==1 ||i ==2{
+func fufeibonachi(i int) int {
+	if i == 1 || i == 2 {
 		return 1
 	}
 
-	return fufeibonachi(i-1)+fufeibonachi(i-2)
+	return fufeibonachi(i-1) + fufeibonachi(i-2)
 }
 
 func rob(nums []int) int {

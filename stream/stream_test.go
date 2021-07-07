@@ -6,8 +6,8 @@ import (
 )
 
 func TestStream(t *testing.T) {
-	//StreamMap()
-	prinf()
+	StreamMap()
+	//prinf()
 }
 
 func prinf() {
@@ -15,3 +15,4 @@ func prinf() {
 		fmt.Println(i)
 	}
 }
+

@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package proto;
+option go_package = "/";
+// The greeting service definition.
+service Greeter {
+  // Sends a greeting
+  rpc SayAdd (AddRequest) returns (AddReply) {}
+}
+
+// The request message containing the a+b.
+message AddRequest {
+  uint32 a = 1;
+  uint32 b =2;
+}
+
+// The response message containing the c.
+message AddReply {
+  uint32 c = 1;
+}
