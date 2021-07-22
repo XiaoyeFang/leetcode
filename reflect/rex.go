@@ -3,46 +3,20 @@ package reflect
 import (
 	"fmt"
 	"reflect"
-	"sync/atomic"
 )
 
-type student struct {
-	Name string
-}
 
-func zhoujielun(v interface{}) {
-	switch v.(type) {
-
-	case *student, student:
-		fmt.Printf("%s \n", reflect.ValueOf(v))
-		//fmt.Println("111111")
-	}
-}
-
-func (s *student) Reflectex() string {
-	//s := &student{
-	//	"sss",
-	//}
-	//zhoujielun(s)
-	return fmt.Sprintf("%v", s)
-}
-
-type People struct {
-	Name string
-}
-
-func (p *People) String() string {
-	return fmt.Sprintf("print: %s", *p)
-}
-
-var value int32
-
-func SetValue(delta int32) {
-	for {
-		v := value
-		if atomic.CompareAndSwapInt32(&value, v, v + delta) {
-			fmt.Println("aaaaa ")
-			break
+func testReflect() {
+	rv := []interface{}{"hi", 42, func() {}}
+	for _, r := range rv {
+		switch v := reflect.ValueOf(r); v.Kind() {
+		case reflect.String:
+			fmt.Println(v.String())
+			fmt.Println(reflect.TypeOf(r))
+		case reflect.Int, reflect.Int8, reflect.Int16, reflect.Int32, reflect.Int64:
+			fmt.Println(v.Int())
+		default:
+			fmt.Printf("unhandled kind %s", v.Kind())
 		}
 	}
 }

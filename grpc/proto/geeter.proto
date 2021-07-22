@@ -1,20 +1,51 @@
 syntax = "proto3";
 
 package proto;
-option go_package = "/";
+import "annotations.proto";
+option go_package = "../pb";
 // The greeting service definition.
 service Greeter {
   // Sends a greeting
   rpc SayAdd (AddRequest) returns (AddReply) {}
+  rpc SayGoodBye (GoodByeReq) returns(stream GoodByeResp) {}
+  rpc SayGoodMorning (stream GoodMorningReq) returns( GoodMorningResp) {}
+  rpc SayGoodNight (stream SayGoodNightReq) returns(stream SayGoodNightResp) {}
 }
 
 // The request message containing the a+b.
 message AddRequest {
   uint32 a = 1;
-  uint32 b =2;
+  uint32 b = 2;
 }
 
 // The response message containing the c.
 message AddReply {
   uint32 c = 1;
+}
+
+message GoodByeReq {
+  string name = 1;
+
+}
+
+message GoodByeResp {
+  string replay = 1;
+}
+
+message GoodMorningReq {
+  int32 name = 1;
+
+}
+
+message GoodMorningResp {
+  int32 replay = 1;
+}
+
+message SayGoodNightReq {
+  string name = 1;
+
+}
+
+message SayGoodNightResp {
+  string replay = 1;
 }

@@ -76,43 +76,6 @@ func exec(name string, vs ...query) string {
 
 func TestReflectex(t *testing.T) {
 
-	//ret := exec("111", func(n string) string {
-	//	return n + "func1"
-	//}, func(n string) string {
-	//	return n + "func2"
-	//})
-	//fmt.Println(ret)
-
-
-
-	//m := map[string]*Student{"people": {"zhoujielun"}}
-	//m["people"].name = "wuyanzu"
-
-	//p := new(Project)
-	//p.Main()
-
-	p := &People{"sssss"}
-	t.Log(p.String())
-	ch := make(chan int, 1000)
-	go func() {
-		for i := 0; i < 10; i++ {
-			ch <- i
-		}
-	}()
-	go func() {
-		for {
-			a, ok := <-ch
-			if !ok {
-				fmt.Println("close")
-				return
-			}
-			fmt.Println("a: ", a)
-		}
-	}()
-	defer close(ch)
-	fmt.Println("ok")
-	time.Sleep(time.Second * 1)
-
-	//SetValue(1)
+	testReflect()
 
 }
