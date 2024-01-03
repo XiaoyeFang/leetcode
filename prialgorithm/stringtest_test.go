@@ -6,8 +6,11 @@ import (
 )
 
 func TestReverse(t *testing.T) {
-	sum := Reverse(-4432)
-	t.Log(sum)
+	//sum := Reverse(-4432)
+	//t.Log(sum)
+
+	m := map[string]bool{}
+	delete(m, "1")
 }
 
 func TestMyAtoi(t *testing.T) {
@@ -50,4 +53,20 @@ func maxInt(args ...int) int {
 		}
 	}
 	return maxInt
+}
+
+func TestLengthOfLongestSubstring(t *testing.T) {
+	s := "abcbab"
+	l := LengthOfLongestSubstringThree(s)
+	fmt.Println(l)
+}
+
+func TestLongestPalindrome(t *testing.T) {
+	s := "123325"
+	//s := "abcbab"
+
+	//sub := LongestPalindrome(s)
+	maxLen := ExpandAroundCenter(s, 2, 3)
+	start := 2 - (maxLen-1)/2 //防溢出
+	fmt.Println(start)
 }
