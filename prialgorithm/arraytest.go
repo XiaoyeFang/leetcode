@@ -25,7 +25,7 @@ func RemoveDuplicates(nums []int) int {
 	return len(nums)
 }
 
-//方法2
+// 方法2 [1,1,2,3,4]
 func removeDuplicates(nums []int) int {
 	/*
 			排序数组 首先想到双指针 双指针分为长短指针和左右指针
@@ -54,6 +54,31 @@ func removeDuplicates(nums []int) int {
 	}
 
 	return slow + 1
+}
+
+/*
+复杂的删除重复元素
+给你一个有序数组 nums ，请你 原地 删除重复出现的元素，使得出现次数超过两次的元素只出现两次 ，返回删除后数组的新长度。
+不要使用额外的数组空间，你必须在 原地 修改输入数组 并在使用 O(1) 额外空间的条件下完成。
+
+nums := []int{1, 1, 2, 2, 2, 3, 3}
+解析其实可以用在删除单个元素 或者三元素 四元素上吧，
+本质上还是双指针法，idx指向下一个被填充的元素，
+*/
+func RemoveDuplicatesMid(nums []int) int {
+	if len(nums) <= 1 {
+		return len(nums)
+	}
+
+	idx := 1
+	for i := 1; i < len(nums); i++ {
+		if nums[i] != nums[idx-1] {
+			nums[idx] = nums[i]
+			idx++
+		}
+	}
+	fmt.Println(nums)
+	return idx
 }
 
 /*
@@ -140,7 +165,7 @@ func ContainsDuplicate(nums []int) bool {
 	return false
 }
 
-//给定一个非空整数数组，除了某个元素只出现一次以外，其余每个元素均出现两次。找出那个只出现了一次的元素。
+// 给定一个非空整数数组，除了某个元素只出现一次以外，其余每个元素均出现两次。找出那个只出现了一次的元素。
 func SingleNumber(nums []int) int {
 	num := 0
 
@@ -152,7 +177,7 @@ func SingleNumber(nums []int) int {
 	return num
 }
 
-//给定两个数组，编写一个函数来计算它们的交集。
+// 给定两个数组，编写一个函数来计算它们的交集。
 func Intersect(nums1 []int, nums2 []int) []int {
 	m := make(map[int]int) //key 是 nums1中的不重复元素，value是元素在nums1中出现的次数
 	res := []int{}
@@ -168,7 +193,7 @@ func Intersect(nums1 []int, nums2 []int) []int {
 	return res
 }
 
-//给定一个由整数组成的非空数组所表示的非负整数，在该数的基础上加一。
+// 给定一个由整数组成的非空数组所表示的非负整数，在该数的基础上加一。
 func PlusOne(digits []int) []int {
 
 	index := len(digits) - 1
@@ -213,8 +238,15 @@ func add1(digit int) int {
 	}
 }
 
-//给定一个数组 nums，编写一个函数将所有 0 移动到数组的末尾，同时保持非零元素的相对顺序。
-func moveZeroes(nums []int) {
+/*
+给定一个数组 nums，编写一个函数将所有 0 移动到数组的末尾，同时保持非零元素的相对顺序。
+1，0，2，0
+解析：
+*/
+func MoveZeroes(nums []int) {
+	if len(nums) <= 1 {
+		return
+	}
 
 	a := 0
 	for i := 0; i < len(nums); i++ {
@@ -225,7 +257,7 @@ func moveZeroes(nums []int) {
 	}
 }
 
-//给定一个整数数组 nums 和一个目标值 target，请你在该数组中找出和为目标值的那 两个 整数，并返回他们的数组下标。
+// 给定一个整数数组 nums 和一个目标值 target，请你在该数组中找出和为目标值的那 两个 整数，并返回他们的数组下标。
 func TwoSum(nums []int, target int) []int {
 	result := make([]int, 0)
 
@@ -328,7 +360,7 @@ func isContains(b byte, nums []byte) bool {
 	return false
 }
 
-//给定一个 n × n 的二维矩阵表示一个图像。将图像顺时针旋转 90 度。
+// 给定一个 n × n 的二维矩阵表示一个图像。将图像顺时针旋转 90 度。
 func rotate(matrix [][]int) {
 	n := len(matrix)
 
@@ -349,4 +381,81 @@ func rotate(matrix [][]int) {
 		}
 
 	}
+}
+
+/*
+ 给你两个按 非递减顺序 排列的整数数组 nums1 和 nums2，另有两个整数 m 和 n ，分别表示 nums1 和 nums2 中的元素数目。
+
+请你 合并 nums2 到 nums1 中，使合并后的数组同样按 非递减顺序 排列。
+
+注意：最终，合并后数组不应由函数返回，而是存储在数组 nums1 中。为了应对这种情况，nums1 的初始长度为 m + n，其中前 m 个元素表示应合并的元素，后 n 个元素为 0 ，应忽略。nums2 的长度为 n 。
+
+nums1 :=[]
+*/
+
+func MergeList(nums1 []int, m int, nums2 []int, n int) {
+	l1 := m - 1
+	l2 := n - 1
+	lenMerge := m + n - 1
+
+	for l1 >= 0 && l2 >= 0 {
+		if nums1[l1] > nums2[l2] {
+			nums1[lenMerge] = nums1[l1]
+			l1--
+		} else {
+			nums1[lenMerge] = nums2[l2]
+			l2--
+		}
+		lenMerge--
+	}
+	for l2 >= 0 {
+		nums1[lenMerge] = nums2[l2]
+		lenMerge--
+		l2--
+	}
+
+	fmt.Println(nums1)
+}
+
+/*
+给你一个数组 nums 和一个值 val，你需要 原地 移除所有数值等于 val 的元素，并返回移除后数组的新长度。
+
+不要使用额外的数组空间，你必须仅使用 O(1) 额外空间并 原地 修改输入数组。
+
+元素的顺序可以改变。你不需要考虑数组中超出新长度后面的元素。
+
+[2,1,2,3,2]
+首先选用双指针法，短指针负责定位val，长指针负责遍历
+*/
+func RemoveElement(nums []int, val int) int {
+	var slow = 0
+	for i := 0; i < len(nums); i++ {
+		if nums[i] != val {
+			nums[slow] = nums[i]
+			slow++
+		}
+	}
+	fmt.Println(nums)
+	return slow
+}
+
+/*
+ */
+func MultiplyLargeNumbers(a, b string) string {
+	lenA := len(a)
+	lenB := len(b)
+	result := make([]int, lenA+lenB)
+
+	for i := lenA - 1; i >= 0; i-- {
+		for j := lenB - 1; j >= 0; j-- {
+			indexA, indexB := i+j, i+j+1
+			numA, numB := int(a[i]-'0'), int(b[j]-'0')
+			temp := numA*numB + result[indexB]
+
+			result[indexA] += temp / 10
+			result[indexB] = temp % 10
+		}
+	}
+	fmt.Println(result)
+	return ""
 }
