@@ -8,8 +8,10 @@ import (
 	"testing"
 	"time"
 )
-const GUARD_FILE_PATH   = "/guard_of_sync_opec_data"
-const 	filePath = "test_remove"
+
+const GUARD_FILE_PATH = "/guard_of_sync_opec_data"
+const filePath = "test_remove"
+
 func TestReverseListNode(t *testing.T) {
 	//a := &ListNode{Val: 1}
 	//a.Next = &ListNode{Val: 2}
@@ -22,7 +24,7 @@ func TestReverseListNode(t *testing.T) {
 	//b := FindMiddleNode(a)
 	//t.Log(os.Args[0])
 	///home/dashi/data/gemini/gemini/file
-	fmt.Println(splitFileIndex("/home/dashi/data/gemini/gemini_rc/file")+GUARD_FILE_PATH)
+	fmt.Println(splitFileIndex("/home/dashi/data/gemini/gemini_rc/file") + GUARD_FILE_PATH)
 }
 
 func TestCreateCornTab(t *testing.T) {
@@ -61,7 +63,7 @@ func Remove1() {
 			fmt.Printf("1111111os.Create() failed||err=%v \n", innerErr)
 			return
 		}
-		fmt.Printf("1111111111%s \n","Create")
+		fmt.Printf("1111111111%s \n", "Create")
 
 	} else {
 		fmt.Printf("111111syncOpecData() failed||err=%v \n", err)
@@ -72,7 +74,7 @@ func Remove1() {
 			sigs := make(chan os.Signal, 1)
 			signal.Notify(sigs, syscall.SIGINT, syscall.SIGTERM)
 			go func() {
-				<- sigs
+				<-sigs
 				tmpFile.Close()
 				err := os.Remove(filePath)
 				if err != nil {
@@ -87,13 +89,12 @@ func Remove1() {
 				fmt.Printf("1111111os.Remove() failed||err=%v \n", err)
 				return
 			}
-			fmt.Printf("1111111111111%s \n","delete")
+			fmt.Printf("1111111111111%s \n", "delete")
 
 		}()
 	}
-	time.Sleep(10*time.Second)
+	time.Sleep(10 * time.Second)
 	fmt.Printf("1111111111111111111 %s \n", filePath)
-
 
 }
 
@@ -102,7 +103,7 @@ func Remove2() {
 	var tmpFile *os.File
 
 	if _, err := os.Stat(filePath); err == nil {
-		fmt.Printf( "222222%s has already exists, exit. \n", filePath)
+		fmt.Printf("222222%s has already exists, exit. \n", filePath)
 		return
 	} else if os.IsNotExist(err) {
 		var innerErr error
@@ -111,7 +112,7 @@ func Remove2() {
 			fmt.Printf("222222os.Create() failed||err=%v \n", innerErr)
 			return
 		}
-		fmt.Printf("222222222222%s \n","Create")
+		fmt.Printf("222222222222%s \n", "Create")
 	} else {
 		fmt.Printf("22222222syncOpecData() failed||err=%v \n", err)
 		return
@@ -121,7 +122,7 @@ func Remove2() {
 			sigs := make(chan os.Signal, 1)
 			signal.Notify(sigs, syscall.SIGINT, syscall.SIGTERM)
 			go func() {
-				<- sigs
+				<-sigs
 				tmpFile.Close()
 				err := os.Remove(filePath)
 				if err != nil {
@@ -136,15 +137,28 @@ func Remove2() {
 				fmt.Printf("2222222os.Remove() failed||err=%v \n", err)
 				return
 			}
-			fmt.Printf("222222222222%s \n","delete")
+			fmt.Printf("222222222222%s \n", "delete")
 
 		}()
 	}
-	time.Sleep(10*time.Second)
+	time.Sleep(10 * time.Second)
 	fmt.Printf("222222222222222222222 %s \n", filePath)
 
 }
 
-func Fibonacci()  {
+func TestSplitList(t *testing.T) {
+	a := &ListNode{Val: 1}
+	a.Next = &ListNode{Val: 2}
+	a.Next.Next = &ListNode{Val: 3}
+	a.Next.Next.Next = &ListNode{Val: 4}
+	a.Next.Next.Next.Next = &ListNode{Val: 5}
+	pre := reverseBetweenTwo(a, 2, 4)
+	for pre != nil {
+		fmt.Println(pre)
+		pre = pre.Next
+	}
+}
+
+func Fibonacci() {
 
 }
